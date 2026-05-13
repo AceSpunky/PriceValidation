@@ -1,8 +1,9 @@
 sap.ui.define([
     "sap/ui/core/mvc/Controller",
     "sap/ui/model/json/JSONModel",
-    "sap/m/MessageToast"
-], (Controller, JSONModel, MessageToast) => {
+    "sap/m/MessageToast",
+    "sap/ui/core/Fragment"
+], (Controller, JSONModel, MessageToast, Fragment) => {
     "use strict";
 
     return Controller.extend("com.lipton.pricevalidation.controller.BlockedOrders", {
@@ -10,400 +11,248 @@ sap.ui.define([
         onInit() {
             const oData = {
                 summary: {
-                    subtitle: "8 orders — pending KAM / TPM price acceptance",
-                    totalSapValue: "EUR 108,285.00",
-                    totalKamValue: "EUR 95,175.00",
-                    totalDifference: "EUR 13,110.00",
-                    ordersPending: "8"
+                    subtitle: "6 orders — pending price acceptance"
                 },
-                filteredCount: 8,
-                totalCount: 8,
+                filteredCount: 6,
+                totalCount: 6,
                 orders: [
                     {
-                        id: "4500001234",
-                        company: "GB10",
-                        date: "2026-04-18",
-                        customer: "Tesco PLC",
-                        customerId: "0010011001",
-                        itemsPending: 3,
-                        itemsTotal: 3,
-                        sapValueStr: "EUR 14,200.00",
-                        kamValueStr: "EUR 12,700.00",
-                        differenceStr: "EUR 1,500.00",
-                        teamNotified: true,
+                        id: "277265",
+                        customerId: "10004952",
+                        customer: "IMTIAZ GROUP (SMC-PRIVATE) LIMITED",
+                        creationDate: "01.01.2026",
+                        pricingDate: "01.01.2026",
+                        reqDeliveryDate: "20.01.2026",
+                        itemsCount: 3,
                         expanded: true,
                         items: [
                             {
-                                itemNo: "000010",
-                                material: "Iced Tea Lemon 500ml 24pk",
-                                materialId: "MAT-10001",
-                                qty: 500,
-                                unit: "CS",
-                                sapPriceStr: "EUR 14.00",
-                                kamPriceStr: "EUR 12.50",
-                                tpmPriceStr: "EUR 12.00",
-                                diffStr: "EUR 1.50",
-                                status: "Pending",
-                                hasTpm: true
+                                itemNo: "10",
+                                materialId: "6979338",
+                                material: "LIPTON ICE TEA DISPLAY 1-3 350CU",
+                                qty: 1008,
+                                unit: "CU",
+                                lineValueSap: "10,020 EUR",
+                                unitPriceSap: "",
+                                custExpectedUnitPrice: "10,000 EUR",
+                                custExpectedValuePerItem: "",
+                                difference: "20 EUR",
+                                comment: "",
+                                status: "pending"
                             },
                             {
-                                itemNo: "000020",
-                                material: "Iced Tea Peach 500ml 24pk",
-                                materialId: "MAT-10002",
-                                qty: 300,
-                                unit: "CS",
-                                sapPriceStr: "EUR 14.00",
-                                kamPriceStr: "EUR 12.50",
-                                tpmPriceStr: "EUR 12.00",
-                                diffStr: "EUR 1.50",
-                                status: "Pending",
-                                hasTpm: true
+                                itemNo: "20",
+                                materialId: "6979340",
+                                material: "LIPTON BLK VANILLA CARAMEL 20 PYTx12 WE",
+                                qty: 100,
+                                unit: "CU",
+                                lineValueSap: "230 EUR",
+                                unitPriceSap: "",
+                                custExpectedUnitPrice: "200 EUR",
+                                custExpectedValuePerItem: "",
+                                difference: "30 EUR",
+                                comment: "",
+                                status: "pending"
                             },
                             {
-                                itemNo: "000030",
-                                material: "Iced Tea Zero Sugar Lemon 500ml 24pk",
-                                materialId: "MAT-10005",
-                                qty: 200,
-                                unit: "CS",
-                                sapPriceStr: "EUR 15.00",
-                                kamPriceStr: "EUR 13.50",
-                                tpmPriceStr: "—",
-                                diffStr: "EUR 1.50",
-                                status: "Pending",
-                                hasTpm: false
+                                itemNo: "30",
+                                materialId: "6979342",
+                                material: "LIPTON VERBENA 100CSEx12 EU FS",
+                                qty: 54,
+                                unit: "CU",
+                                lineValueSap: "155 EUR",
+                                unitPriceSap: "",
+                                custExpectedUnitPrice: "150 EUR",
+                                custExpectedValuePerItem: "",
+                                difference: "5 EUR",
+                                comment: "",
+                                status: "pending"
                             }
                         ]
                     },
                     {
-                        id: "4500001235",
-                        company: "GB10",
-                        date: "2026-04-19",
-                        customer: "Sainsbury's PLC",
-                        customerId: "0010011002",
-                        itemsPending: 2,
-                        itemsTotal: 2,
-                        sapValueStr: "EUR 8,500.00",
-                        kamValueStr: "EUR 7,600.00",
-                        differenceStr: "EUR 900.00",
-                        teamNotified: true,
+                        id: "287802",
+                        customerId: "10005257",
+                        customer: "PLANET COLORS GENERAL TRADING LLC",
+                        creationDate: "04.01.2026",
+                        pricingDate: "04.01.2026",
+                        reqDeliveryDate: "20.01.2026",
+                        itemsCount: 2,
                         expanded: false,
                         items: [
                             {
-                                itemNo: "000010",
-                                material: "Iced Tea Lemon 500ml 24pk",
-                                materialId: "MAT-10001",
-                                qty: 300,
-                                unit: "CS",
-                                sapPriceStr: "EUR 14.00",
-                                kamPriceStr: "EUR 12.50",
-                                tpmPriceStr: "EUR 12.00",
-                                diffStr: "EUR 1.50",
-                                status: "Pending",
-                                hasTpm: true
+                                itemNo: "10",
+                                materialId: "6979138",
+                                material: "PUK ORG LGTMH FFL FW 4X20 PENT P",
+                                qty: 38,
+                                unit: "CU",
+                                lineValueSap: "",
+                                unitPriceSap: "2.3 EUR",
+                                custExpectedUnitPrice: "2 EUR",
+                                custExpectedValuePerItem: "10.2 EUR",
+                                difference: "11.4 EUR",
+                                comment: "",
+                                status: "pending"
                             },
                             {
-                                itemNo: "000020",
-                                material: "Still Water 500ml 24pk",
-                                materialId: "MAT-10020",
-                                qty: 200,
-                                unit: "CS",
-                                sapPriceStr: "EUR 9.50",
-                                kamPriceStr: "EUR 8.75",
-                                tpmPriceStr: "—",
-                                diffStr: "EUR 0.75",
-                                status: "Pending",
-                                hasTpm: false
+                                itemNo: "20",
+                                materialId: "6979255",
+                                material: "LIPTON YELLOW LBL 25 CSEX12 EU 26",
+                                qty: 40,
+                                unit: "CU",
+                                lineValueSap: "",
+                                unitPriceSap: "3.6 EUR",
+                                custExpectedUnitPrice: "3.5 EUR",
+                                custExpectedValuePerItem: "",
+                                difference: "4 EUR",
+                                comment: "",
+                                status: "pending"
                             }
                         ]
                     },
                     {
-                        id: "4500001236",
-                        company: "DE10",
-                        date: "2026-04-20",
-                        customer: "ASDA Ltd",
-                        customerId: "0010011003",
-                        itemsPending: 4,
-                        itemsTotal: 4,
-                        sapValueStr: "EUR 22,400.00",
-                        kamValueStr: "EUR 19,800.00",
-                        differenceStr: "EUR 2,600.00",
-                        teamNotified: true,
+                        id: "423892",
+                        customerId: "10000360",
+                        customer: "Tesco PLF",
+                        creationDate: "06.01.2026",
+                        pricingDate: "06.01.2026",
+                        reqDeliveryDate: "20.01.2026",
+                        itemsCount: 1,
                         expanded: false,
                         items: [
                             {
-                                itemNo: "000010",
-                                material: "Iced Tea Lemon 500ml 24pk",
-                                materialId: "MAT-10001",
-                                qty: 500,
-                                unit: "CS",
-                                sapPriceStr: "EUR 14.00",
-                                kamPriceStr: "EUR 12.00",
-                                tpmPriceStr: "EUR 11.50",
-                                diffStr: "EUR 2.00",
-                                status: "Pending",
-                                hasTpm: true
-                            },
-                            {
-                                itemNo: "000020",
-                                material: "Iced Tea Peach 500ml 24pk",
-                                materialId: "MAT-10002",
-                                qty: 400,
-                                unit: "CS",
-                                sapPriceStr: "EUR 14.00",
-                                kamPriceStr: "EUR 12.00",
-                                tpmPriceStr: "EUR 11.50",
-                                diffStr: "EUR 2.00",
-                                status: "Pending",
-                                hasTpm: true
-                            },
-                            {
-                                itemNo: "000030",
-                                material: "Iced Tea Mango 500ml 24pk",
-                                materialId: "MAT-10006",
-                                qty: 300,
-                                unit: "CS",
-                                sapPriceStr: "EUR 14.00",
-                                kamPriceStr: "EUR 12.00",
-                                tpmPriceStr: "—",
-                                diffStr: "EUR 2.00",
-                                status: "Pending",
-                                hasTpm: false
-                            },
-                            {
-                                itemNo: "000040",
-                                material: "Iced Tea Raspberry 500ml 24pk",
-                                materialId: "MAT-10007",
-                                qty: 400,
-                                unit: "CS",
-                                sapPriceStr: "EUR 14.00",
-                                kamPriceStr: "EUR 12.50",
-                                tpmPriceStr: "EUR 12.00",
-                                diffStr: "EUR 1.50",
-                                status: "Pending",
-                                hasTpm: true
+                                itemNo: "10",
+                                materialId: "6979934",
+                                material: "PUK ORG English Breakfast FFL 4x20C NOR",
+                                qty: 1008,
+                                unit: "CU",
+                                lineValueSap: "",
+                                unitPriceSap: "2.2 EUR",
+                                custExpectedUnitPrice: "1.8 EUR",
+                                custExpectedValuePerItem: "403.2 EUR",
+                                difference: "403.2 EUR",
+                                comment: "",
+                                status: "pending"
                             }
                         ]
                     },
                     {
-                        id: "4500001237",
-                        company: "GB10",
-                        date: "2026-04-21",
-                        customer: "Morrisons PLC",
-                        customerId: "0010011004",
-                        itemsPending: 1,
-                        itemsTotal: 1,
-                        sapValueStr: "EUR 5,200.00",
-                        kamValueStr: "EUR 4,700.00",
-                        differenceStr: "EUR 500.00",
-                        teamNotified: false,
+                        id: "423893",
+                        customerId: "10000360",
+                        customer: "Tesco PGL",
+                        creationDate: "07.01.2026",
+                        pricingDate: "07.01.2026",
+                        reqDeliveryDate: "20.01.2026",
+                        itemsCount: 1,
                         expanded: false,
                         items: [
                             {
-                                itemNo: "000010",
-                                material: "Sparkling Lemon Water 500ml 24pk",
-                                materialId: "MAT-10030",
-                                qty: 400,
-                                unit: "CS",
-                                sapPriceStr: "EUR 13.00",
-                                kamPriceStr: "EUR 11.75",
-                                tpmPriceStr: "—",
-                                diffStr: "EUR 1.25",
-                                status: "Pending",
-                                hasTpm: false
+                                itemNo: "10",
+                                materialId: "6979398",
+                                material: "LIPTON EARL GREY 6 25CSEX6 EU_FS",
+                                qty: 100,
+                                unit: "CU",
+                                lineValueSap: "560 EUR",
+                                unitPriceSap: "",
+                                custExpectedUnitPrice: "550 EUR",
+                                custExpectedValuePerItem: "",
+                                difference: "10 EUR",
+                                comment: "",
+                                status: "pending"
                             }
                         ]
                     },
                     {
-                        id: "4500001238",
-                        company: "GB10",
-                        date: "2026-04-22",
-                        customer: "Waitrose Ltd",
-                        customerId: "0010011005",
-                        itemsPending: 2,
-                        itemsTotal: 2,
-                        sapValueStr: "EUR 11,800.00",
-                        kamValueStr: "EUR 10,500.00",
-                        differenceStr: "EUR 1,300.00",
-                        teamNotified: true,
+                        id: "250663",
+                        customerId: "10000360",
+                        customer: "Tesco PLF",
+                        creationDate: "08.01.2026",
+                        pricingDate: "08.01.2026",
+                        reqDeliveryDate: "20.01.2026",
+                        itemsCount: 2,
                         expanded: false,
                         items: [
                             {
-                                itemNo: "000010",
-                                material: "Premium Iced Tea Lemon 750ml 12pk",
-                                materialId: "MAT-10040",
-                                qty: 600,
-                                unit: "CS",
-                                sapPriceStr: "EUR 11.50",
-                                kamPriceStr: "EUR 10.20",
-                                tpmPriceStr: "EUR 9.80",
-                                diffStr: "EUR 1.30",
-                                status: "Pending",
-                                hasTpm: true
+                                itemNo: "10",
+                                materialId: "6999331",
+                                material: "LIPTON STRAWBERRY 25CSEX6 EU_FS",
+                                qty: 54,
+                                unit: "CU",
+                                lineValueSap: "410 EUR",
+                                unitPriceSap: "",
+                                custExpectedUnitPrice: "400 EUR",
+                                custExpectedValuePerItem: "",
+                                difference: "10 EUR",
+                                comment: "",
+                                status: "pending"
                             },
                             {
-                                itemNo: "000020",
-                                material: "Premium Iced Tea Peach 750ml 12pk",
-                                materialId: "MAT-10041",
-                                qty: 450,
-                                unit: "CS",
-                                sapPriceStr: "EUR 11.50",
-                                kamPriceStr: "EUR 10.20",
-                                tpmPriceStr: "—",
-                                diffStr: "EUR 1.30",
-                                status: "Pending",
-                                hasTpm: false
+                                itemNo: "20",
+                                materialId: "6999319",
+                                material: "LIPTON BLACK CURRANT 25CSEX6 EU_FS",
+                                qty: 38,
+                                unit: "CU",
+                                lineValueSap: "150 EUR",
+                                unitPriceSap: "",
+                                custExpectedUnitPrice: "140 EUR",
+                                custExpectedValuePerItem: "",
+                                difference: "10 EUR",
+                                comment: "",
+                                status: "pending"
                             }
                         ]
                     },
                     {
-                        id: "4500001239",
-                        company: "FR10",
-                        date: "2026-04-23",
-                        customer: "Co-op Food",
-                        customerId: "0010011006",
-                        itemsPending: 3,
-                        itemsTotal: 3,
-                        sapValueStr: "EUR 9,600.00",
-                        kamValueStr: "EUR 8,800.00",
-                        differenceStr: "EUR 800.00",
-                        teamNotified: true,
+                        id: "423897",
+                        customerId: "10004952",
+                        customer: "IMTIAZ GROUP (SMC-PRIVATE) LIMITED",
+                        creationDate: "10.01.2026",
+                        pricingDate: "10.01.2026",
+                        reqDeliveryDate: "20.01.2026",
+                        itemsCount: 3,
                         expanded: false,
                         items: [
                             {
-                                itemNo: "000010",
-                                material: "Iced Tea Lemon 330ml 24pk",
-                                materialId: "MAT-10050",
-                                qty: 400,
-                                unit: "CS",
-                                sapPriceStr: "EUR 9.00",
-                                kamPriceStr: "EUR 8.20",
-                                tpmPriceStr: "EUR 8.00",
-                                diffStr: "EUR 0.80",
-                                status: "Pending",
-                                hasTpm: true
+                                itemNo: "10",
+                                materialId: "6949334",
+                                material: "LIPTON VP TOPSELLER 180CSEX1 FS EU",
+                                qty: 40,
+                                unit: "CU",
+                                lineValueSap: "180 EUR",
+                                unitPriceSap: "",
+                                custExpectedUnitPrice: "175 EUR",
+                                custExpectedValuePerItem: "",
+                                difference: "5 EUR",
+                                comment: "",
+                                status: "pending"
                             },
                             {
-                                itemNo: "000020",
-                                material: "Iced Tea Peach 330ml 24pk",
-                                materialId: "MAT-10051",
-                                qty: 350,
-                                unit: "CS",
-                                sapPriceStr: "EUR 9.00",
-                                kamPriceStr: "EUR 8.20",
-                                tpmPriceStr: "—",
-                                diffStr: "EUR 0.80",
-                                status: "Pending",
-                                hasTpm: false
+                                itemNo: "20",
+                                materialId: "6939438",
+                                material: "LIPTON ICETEA INF MINTLIME 10PYTx4 NE",
+                                qty: 100,
+                                unit: "CU",
+                                lineValueSap: "265 EUR",
+                                unitPriceSap: "",
+                                custExpectedUnitPrice: "250 EUR",
+                                custExpectedValuePerItem: "",
+                                difference: "15 EUR",
+                                comment: "",
+                                status: "pending"
                             },
                             {
-                                itemNo: "000030",
-                                material: "Iced Tea Green 330ml 24pk",
-                                materialId: "MAT-10052",
-                                qty: 300,
-                                unit: "CS",
-                                sapPriceStr: "EUR 9.00",
-                                kamPriceStr: "EUR 8.20",
-                                tpmPriceStr: "EUR 8.00",
-                                diffStr: "EUR 0.80",
-                                status: "Pending",
-                                hasTpm: true
-                            }
-                        ]
-                    },
-                    {
-                        id: "4500001240",
-                        company: "DE10",
-                        date: "2026-04-25",
-                        customer: "Aldi UK",
-                        customerId: "0010011007",
-                        itemsPending: 2,
-                        itemsTotal: 2,
-                        sapValueStr: "EUR 18,985.00",
-                        kamValueStr: "EUR 17,200.00",
-                        differenceStr: "EUR 1,785.00",
-                        teamNotified: true,
-                        expanded: false,
-                        items: [
-                            {
-                                itemNo: "000010",
-                                material: "Iced Tea Lemon 500ml 24pk",
-                                materialId: "MAT-10001",
-                                qty: 700,
-                                unit: "CS",
-                                sapPriceStr: "EUR 14.00",
-                                kamPriceStr: "EUR 12.75",
-                                tpmPriceStr: "EUR 12.25",
-                                diffStr: "EUR 1.25",
-                                status: "Pending",
-                                hasTpm: true
-                            },
-                            {
-                                itemNo: "000020",
-                                material: "Iced Tea Peach 500ml 24pk",
-                                materialId: "MAT-10002",
-                                qty: 585,
-                                unit: "CS",
-                                sapPriceStr: "EUR 14.00",
-                                kamPriceStr: "EUR 12.50",
-                                tpmPriceStr: "—",
-                                diffStr: "EUR 1.50",
-                                status: "Pending",
-                                hasTpm: false
-                            }
-                        ]
-                    },
-                    {
-                        id: "4500001241",
-                        company: "GB10",
-                        date: "2026-04-26",
-                        customer: "Lidl GB",
-                        customerId: "0010011008",
-                        itemsPending: 3,
-                        itemsTotal: 3,
-                        sapValueStr: "EUR 17,600.00",
-                        kamValueStr: "EUR 13,875.00",
-                        differenceStr: "EUR 3,725.00",
-                        teamNotified: false,
-                        expanded: false,
-                        items: [
-                            {
-                                itemNo: "000010",
-                                material: "Iced Tea Lemon 500ml 24pk",
-                                materialId: "MAT-10001",
-                                qty: 600,
-                                unit: "CS",
-                                sapPriceStr: "EUR 14.00",
-                                kamPriceStr: "EUR 10.50",
-                                tpmPriceStr: "EUR 10.00",
-                                diffStr: "EUR 3.50",
-                                status: "Pending",
-                                hasTpm: true
-                            },
-                            {
-                                itemNo: "000020",
-                                material: "Iced Tea Peach 500ml 24pk",
-                                materialId: "MAT-10002",
-                                qty: 450,
-                                unit: "CS",
-                                sapPriceStr: "EUR 14.00",
-                                kamPriceStr: "EUR 10.50",
-                                tpmPriceStr: "—",
-                                diffStr: "EUR 3.50",
-                                status: "Pending",
-                                hasTpm: false
-                            },
-                            {
-                                itemNo: "000030",
-                                material: "Sparkling Water Lemon 500ml 24pk",
-                                materialId: "MAT-10035",
-                                qty: 350,
-                                unit: "CS",
-                                sapPriceStr: "EUR 9.50",
-                                kamPriceStr: "EUR 8.50",
-                                tpmPriceStr: "EUR 8.00",
-                                diffStr: "EUR 1.00",
-                                status: "Pending",
-                                hasTpm: true
+                                itemNo: "30",
+                                materialId: "6979338",
+                                material: "LIPTON ICE TEA DISPLAY 1-3 350CU",
+                                qty: 54,
+                                unit: "CU",
+                                lineValueSap: "",
+                                unitPriceSap: "2.44 EUR",
+                                custExpectedUnitPrice: "2.3 EUR",
+                                custExpectedValuePerItem: "0.14 EUR",
+                                difference: "7.56 EUR",
+                                comment: "",
+                                status: "pending"
                             }
                         ]
                     }
@@ -468,6 +317,44 @@ sap.ui.define([
         onItemAcceptSAP(oEvent) {
             const oCtx = oEvent.getSource().getBindingContext("orders");
             MessageToast.show("SAP price accepted for item " + oCtx.getProperty("itemNo"));
+        },
+
+        onAddComment(oEvent) {
+            const oCtx = oEvent.getSource().getBindingContext("orders");
+            this._sCommentPath = oCtx.getPath();
+            const oItem = oCtx.getObject();
+
+            const oCommentModel = new JSONModel({
+                title: (oItem.comment ? "Edit" : "Add") + " Comment — Item # " + oItem.itemNo,
+                itemLabel: oItem.material + " (" + oItem.materialId + ")",
+                text: oItem.comment || ""
+            });
+            this.getView().setModel(oCommentModel, "comment");
+
+            if (!this._oCommentDialog) {
+                Fragment.load({
+                    id: this.getView().getId(),
+                    name: "com.lipton.pricevalidation.view.fragment.CommentDialog",
+                    controller: this
+                }).then((oDialog) => {
+                    this._oCommentDialog = oDialog;
+                    this.getView().addDependent(oDialog);
+                    oDialog.open();
+                });
+            } else {
+                this._oCommentDialog.open();
+            }
+        },
+
+        onCommentSave() {
+            const sText = this.getView().getModel("comment").getProperty("/text").trim();
+            this.getView().getModel("orders").setProperty(this._sCommentPath + "/comment", sText || "");
+            this._oCommentDialog.close();
+            MessageToast.show("Comment saved");
+        },
+
+        onCommentCancel() {
+            this._oCommentDialog.close();
         }
     });
 });

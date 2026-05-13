@@ -2,7 +2,9 @@
     xmlns:mvc="sap.ui.core.mvc"
     xmlns="sap.m"
     xmlns:f="sap.f"
-    xmlns:grid="sap.ui.layout.cssgrid" displayBlock="true">
+    xmlns:grid="sap.ui.layout.cssgrid"
+    xmlns:core="sap.ui.core"
+    displayBlock="true">
 
     <Page id="page" title="Blocked Orders" showHeader="false">
         <content>
@@ -20,7 +22,6 @@
                 <!-- Warning Strip -->
                 <MessageStrip id="pageSubtitle" text="{orders>/summary/subtitle}" type="Warning" showIcon="true" class="sapUiSmallMarginBottom sapUiSmallMarginBeginEnd"/>
 
-
                 <!-- Orders GridList -->
                 <f:GridList id="ordersGrid" items="{orders>/orders}" showNoData="true" noDataText="No blocked orders found" class="sapUiSmallMarginBeginEnd sapUiSmallMarginBottom" width="98%">
                     <f:customLayout>
@@ -31,8 +32,7 @@
                             <Panel id="orderPanel" expandable="true" expanded="{orders>expanded}">
                                 <headerToolbar>
                                     <OverflowToolbar id="orderPanelToolbar" height="4rem">
-                                        <Title id="orderIdTitle" class="sapUiTinyMarginEnd" text="{orders>id}" titleStyle="H4"/>
-                                        <ObjectStatus id="orderMeta" text="{= ${orders>company} + ' · ' + ${orders>date}}" state="Information"/>
+                                        <ObjectStatus id="orderIdTitle" class="sapMObjectStatusLarge" title="Sales Order Number" text="{orders>id}" state="Information"/>
                                         <ToolbarSpacer id="orderToolbarSpacer"/>
                                         <Button id="orderKamBtn" text="All KAM" type="Accept" press=".onOrderAcceptAllKAM" class="sapUiTinyMarginEnd"/>
                                         <Button id="orderSapBtn" class="sapUiSmallMarginEnd" text="All SAP" press=".onOrderAcceptAllSAP"/>
@@ -40,86 +40,102 @@
                                 </headerToolbar>
                                 <content>
                                     <HBox id="orderDetails" wrap="Wrap" class="sapUiSmallMargin" justifyContent="SpaceBetween">
-                                        <VBox id="detailCustomer" class="sapUiSmallMarginEnd" width="170px">
-                                            <Label id="lblDetailCustomer" text="Customer" design="Bold"/>
-                                            <ObjectStatus id="valDetailCustomer" text="{orders>customer}" class="sapUiTinyMarginTop sapMObjectStatusLarge"/>
-                                            <Text id="customerId" text="{orders>customerId}" class="sapUiTinyMarginTop"/>
+                                        <VBox id="detailSoldTo" class="sapUiSmallMarginEnd">
+                                            <Label id="lblDetailSoldTo" text="Sold to Customer" design="Bold"/>
+                                            <ObjectStatus id="valDetailSoldTo" text="{orders>customerId}" class="sapUiTinyMarginTop sapMObjectStatusLarge"/>
                                         </VBox>
-                                        <VBox id="detailItems" class="sapUiSmallMarginEnd" width="170px">
-                                            <Label id="lblDetailItems" text="Items" design="Bold"/>
-                                            <ObjectStatus id="valDetailItems" text="{= ${orders>itemsPending} + '/' + ${orders>itemsTotal} + ' pending'}" class="sapUiTinyMarginTop sapMObjectStatusLarge" state="Warning"/>
+                                        <VBox id="detailCustomerName" class="sapUiSmallMarginEnd">
+                                            <Label id="lblDetailCustomerName" text="Customer Name" design="Bold"/>
+                                            <ObjectStatus id="valDetailCustomerName" text="{orders>customer}" class="sapUiTinyMarginTop sapMObjectStatusLarge"/>
                                         </VBox>
-                                        <VBox id="detailSap" class="sapUiSmallMarginEnd" width="170px">
-                                            <Label id="lblDetailSap" text="SAP Value" design="Bold"/>
-                                            <ObjectStatus id="valDetailSap" text="{orders>sapValueStr}" class="sapUiTinyMarginTop sapMObjectStatusLarge"/>
+                                        <VBox id="detailCreationDate" class="sapUiSmallMarginEnd" >
+                                            <Label id="lblDetailCreationDate" text="Order Creation Date" design="Bold"/>
+                                            <ObjectStatus id="valDetailCreationDate" text="{orders>creationDate}" class="sapUiTinyMarginTop sapMObjectStatusLarge"/>
                                         </VBox>
-                                        <VBox id="detailKam" class="sapUiSmallMarginEnd" width="170px">
-                                            <Label id="lblDetailKam" text="KAM Value" design="Bold"/>
-                                            <ObjectStatus id="valDetailKam" text="{orders>kamValueStr}" class="sapUiTinyMarginTop sapMObjectStatusLarge"/>
+                                        <VBox id="detailPricingDate" class="sapUiSmallMarginEnd" >
+                                            <Label id="lblDetailPricingDate" text="Pricing Date" design="Bold"/>
+                                            <ObjectStatus id="valDetailPricingDate" text="{orders>pricingDate}" class="sapUiTinyMarginTop sapMObjectStatusLarge"/>
                                         </VBox>
-                                        <VBox id="detailDiff" class="sapUiSmallMarginEnd" width="170px">
-                                            <Label id="lblDetailDiff" text="Δ Difference" design="Bold"/>
-                                            <ObjectStatus id="valDetailDiff" text="{orders>differenceStr}" state="Error" class="sapUiTinyMarginTop sapMObjectStatusLarge" />
-                                        </VBox>
-                                        <VBox id="detailNotified" width="170px">
-                                            <Label id="lblDetailNotified" text="Team Notified" design="Bold"/>
-                                            <ObjectStatus id="valDetailNotified" text="Notified" state="Success" visible="{orders>teamNotified}" class="sapUiTinyMarginTop sapMObjectStatusLarge" />
+                                        <VBox id="detailReqDelivery" width="170px">
+                                            <Label id="lblDetailReqDelivery" text="Req. Delivery Date" design="Bold"/>
+                                            <ObjectStatus id="valDetailReqDelivery" text="{orders>reqDeliveryDate}" class="sapUiTinyMarginTop sapMObjectStatusLarge"/>
                                         </VBox>
                                     </HBox>
 
                                     <OverflowToolbar id="linesItemsTitleToolbar" height="4rem">
-                                        <Title id="lineItemsTitle" text="{= 'LINE ITEMS — ' + ${orders>id} + ' · ' + ${orders>customer}}" titleStyle="H4" class="sapUiSmallMarginBottom sapUiMediumMarginTop"/>
+                                        <Title id="lineItemsTitle" text="{= 'LINE ITEMS (' + ${orders>itemsCount} + ')'}" titleStyle="H4" class="sapUiSmallMarginBottom sapUiMediumMarginTop"/>
                                     </OverflowToolbar>
 
-                                    <Table id="lineItemsTable" items="{orders>items}" showSeparators="All" fixedLayout="false" class="sapUiSmallMarginBottom">
+                                    <Table id="lineItemsTable" items="{orders>items}" showSeparators="All" fixedLayout="true" class="sapUiSmallMarginBottom">
                                         <columns>
-                                            <Column id="colItemNo">
-                                                <Text id="lblItemNo" text="ITEM #"/>
+                                            <Column id="colItemNo" width="60px">
+                                                <Text id="lblItemNo" text="LINE"/>
                                             </Column>
-                                            <Column id="colMaterial">
+                                            <Column id="colMaterial" width="100px">
                                                 <Text id="lblMaterial" text="MATERIAL"/>
                                             </Column>
-                                            <Column id="colQty">
+                                            <Column id="colMaterialDesc" width="220px">
+                                                <Text id="lblMaterialDesc" text="MATERIAL DESC"/>
+                                            </Column>
+                                            <Column id="colQty" width="90px">
                                                 <Text id="lblQty" text="QTY"/>
                                             </Column>
-                                            <Column id="colSapCs">
-                                                <Text id="lblSapCs" text="SAP / CS"/>
+                                            <Column id="colLineValueSap" width="130px">
+                                                <Text id="lblLineValueSap" text="LINE VALUE SAP"/>
                                             </Column>
-                                            <Column id="colKamCs">
-                                                <Text id="lblKamCs" text="KAM / CS"/>
+                                            <Column id="colUnitPriceSap" width="130px">
+                                                <Text id="lblUnitPriceSap" text="UNIT PRICE SAP"/>
                                             </Column>
-                                            <Column id="colTpmCs">
-                                                <Text id="lblTpmCs" text="TPM / CS"/>
+                                            <Column id="colCustExpectedUnit" width="160px">
+                                                <Text id="lblCustExpectedUnit" text="CUST. EXPECTED UNIT PRICE"/>
                                             </Column>
-                                            <Column id="colDiff">
-                                                <Text id="lblDiff" text="Δ DIFF"/>
+                                            <Column id="colCustExpectedValue" width="160px">
+                                                <Text id="lblCustExpectedValue" text="CUST. EXPECTED VALUE / ITEM"/>
                                             </Column>
-                                            <Column id="colStatus">
+                                            <Column id="colDiff" width="110px">
+                                                <Text id="lblDiff" text="DIFFERENCE"/>
+                                            </Column>
+                                            <Column id="colComments" width="160px">
+                                                <Text id="lblComments" text="KAM COMMENTS"/>
+                                            </Column>
+                                            <Column id="colStatus" width="130px">
                                                 <Text id="lblStatus" text="STATUS"/>
                                             </Column>
-                                            <Column id="colActions">
-                                                <Text id="lblActions" text="ACTIONS"/>
+                                            <Column id="colActions" width="150px">
+                                                <Text id="lblActions" text="KAM ACTION"/>
                                             </Column>
                                         </columns>
                                         <items>
                                             <ColumnListItem id="lineItem" type="Inactive">
                                                 <cells>
-                                                    <ObjectIdentifier id="cellItemNo" title="{orders>itemNo}"/>
-                                                    <VBox id="cellMaterialBox">
-                                                        <Text id="cellMaterial" text="{orders>material}"/>
-                                                        <Text id="cellMaterialId" text="{orders>materialId}" class="pvSubText"/>
-                                                    </VBox>
+                                                    <Text id="cellItemNo" text="{orders>itemNo}"/>
+                                                    <Text id="cellMaterialId" text="{orders>materialId}"/>
+                                                    <Text id="cellMaterial" text="{orders>material}"/>
                                                     <Text id="cellQty" text="{= ${orders>qty} + ' ' + ${orders>unit}}"/>
-                                                    <Text id="cellSapPrice" text="{orders>sapPriceStr}"/>
-                                                    <Text id="cellKamPrice" text="{orders>kamPriceStr}"/>
-                                                    <Text id="cellTpmPrice" text="{orders>tpmPriceStr}"/>
-                                                    <ObjectStatus id="cellDiff" text="{orders>diffStr}" state="Error"/>
-                                                    <ObjectStatus id="cellStatus" text="{orders>status}" state="Warning" inverted="true"/>
-                                                    <HBox id="cellActions">
-                                                        <Button id="itemKamBtn" text="KAM" type="Accept" press=".onItemAcceptKAM" class="sapUiTinyMarginEnd"/>
-                                                        <Button id="itemTpmBtn" text="TPM" type="Accept" press=".onItemAcceptTPM" visible="{orders>hasTpm}" class="sapUiTinyMarginEnd"/>
-                                                        <Button id="itemSapBtn" text="SAP" press=".onItemAcceptSAP"/>
-                                                    </HBox>
+                                                    <Text id="cellLineValueSap" text="{orders>lineValueSap}"/>
+                                                    <Text id="cellUnitPriceSap" text="{orders>unitPriceSap}"/>
+                                                    <Text id="cellCustExpectedUnit" text="{orders>custExpectedUnitPrice}"/>
+                                                    <Text id="cellCustExpectedValue" text="{orders>custExpectedValuePerItem}"/>
+                                                    <ObjectStatus id="cellDiff" text="{orders>difference}" state="Error"/>
+                                                    <VBox id="cellCommentsBox">
+                                                        <Text id="cellCommentText" text="{orders>comment}" visible="{= !!${orders>comment}}" class="pvSubText sapUiTinyMarginBottom"/>
+                                                        <Button id="cellAddCommentBtn" text="{= ${orders>comment} ? 'Edit Comment' : 'Add Comment'}" icon="sap-icon://comment" type="Transparent" press=".onAddComment"/>
+                                                    </VBox>
+                                                    <Select id="cellStatus" selectedKey="pending">
+                                                        <items>
+                                                            <core:Item id="statusPending" key="pending" text="Pending"/>
+                                                            <core:Item id="statusApproved" key="approved" text="Approved"/>
+                                                            <core:Item id="statusRejected" key="rejected" text="Rejected"/>
+                                                            <core:Item id="statusOnHold" key="on_hold" text="On Hold"/>
+                                                            <core:Item id="statusEscalated" key="escalated" text="Escalated"/>
+                                                        </items>
+                                                    </Select>
+                                                    <Select id="cellActions" selectedKey="acceptSap">
+                                                        <items>
+                                                            <core:Item id="actionAcceptSap" key="acceptSap" text="Accept SAP Price"/>
+                                                            <core:Item id="actionAcceptCustExpected" key="acceptCustExpected" text="Accept Customer Expected Price"/>
+                                                        </items>
+                                                    </Select>
                                                 </cells>
                                             </ColumnListItem>
                                         </items>
