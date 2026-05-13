@@ -6,96 +6,11 @@
     padding: 1.5rem;
 }
 
-.pvSubtitle {
-    color: #6a6d70;
-    font-size: 0.875rem;
-}
-
-/* KPI Cards */
-.pvKpiCard {
-    background: #ffffff;
-    border: 1px solid #e5e5e5;
-    border-radius: 8px;
-    padding: 1rem 1.25rem;
-    min-width: 190px;
-}
-
-.pvKpiLabel {
-    font-size: 0.75rem;
-    font-weight: bold;
-    color: #6a6d70;
-    text-transform: uppercase;
-    letter-spacing: 0.03em;
-}
-
-.pvKpiValue {
-    font-size: 1.375rem;
-    font-weight: bold;
-    margin-top: 0.25rem;
-    color: #32363a;
-}
-
-.pvKpiValueRed {
-    color: #bb0000 !important;
-}
-
-.pvKpiValueBlue {
-    color: #0070f2 !important;
-}
-
-/* Column Header Bar */
-.pvColHeaderBar {
-    background: #f5f5f5;
-    border: 1px solid #e0e0e0;
-    border-bottom: none;
-    padding: 0.5rem 0.75rem;
-    border-radius: 4px 4px 0 0;
-}
-
-.pvColHeaderText {
-    font-size: 0.75rem;
-    font-weight: bold;
-    color: #6a6d70;
-    text-transform: uppercase;
-    letter-spacing: 0.03em;
-    white-space: nowrap;
-}
-
-.pvOrderCount {
-    font-size: 0.8125rem;
-    color: #6a6d70;
-    white-space: nowrap;
-}
-
-/* Orders GridList */
-.pvOrderGridItem {
-    padding: 0 !important;
-    border-bottom: 1px solid #e5e5e5;
-}
-
-.pvOrderGridItem:last-child {
-    border-bottom: none;
-}
-
-.pvOrderRow {
-    padding: 0.75rem;
-    min-height: 56px;
-}
-
-.pvExpandBtn {
-    min-width: 36px !important;
-    width: 36px !important;
-    padding: 0 !important;
-}
-
-.pvOrderLink {
-    font-weight: bold;
-    color: #0070f2;
-    font-size: 0.9375rem;
-}
-
-.pvCustomerName {
-    font-weight: 600;
+/* Search Toolbar */
+.pvSearchToolbar {
+    background: transparent;
+    border: none;
+    padding: 0;
 }
 
 .pvSubText {
@@ -103,34 +18,8 @@
     color: #89919a;
 }
 
-/* Items pending badge */
-.pvItemsCount {
-    color: #e8a000;
-    font-weight: bold;
-    font-size: 0.9375rem;
-    line-height: 1.2;
-}
-
-.pvItemsPending {
-    color: #e8a000;
-    font-size: 0.75rem;
-}
-
 /* Difference value */
 .pvDiffValue {
     color: #bb0000;
     font-weight: bold;
-}
-
-/* Line Items Panel */
-.pvLineItemsWrap {
-    padding: 1rem 1.25rem 1.25rem 3rem;
-    background: #fafafa;
-    border-top: 1px solid #e5e5e5;
-}
-
-.pvLineItemsTable {
-    width: 100%;
-    background: #ffffff;
-    border-radius: 4px;
 }

@@ -437,13 +437,6 @@ sap.ui.define([
             oModel.setProperty("/filteredCount", aFiltered.length);
         },
 
-        onExpandOrder(oEvent) {
-            const oCtx = oEvent.getSource().getBindingContext("orders");
-            const sPath = oCtx.getPath();
-            const oModel = this.getView().getModel("orders");
-            oModel.setProperty(sPath + "/expanded", !oModel.getProperty(sPath + "/expanded"));
-        },
-
         onOrderPress(oEvent) {
             const sId = oEvent.getSource().getBindingContext("orders").getProperty("id");
             MessageToast.show("Opening order " + sId);
