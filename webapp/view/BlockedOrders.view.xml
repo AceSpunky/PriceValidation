@@ -112,11 +112,11 @@
                                                     <Text id="cellMaterialId" text="{orders>materialId}"/>
                                                     <Text id="cellMaterial" text="{orders>material}"/>
                                                     <Text id="cellQty" text="{= ${orders>qty} + ' ' + ${orders>unit}}"/>
-                                                    <Text id="cellLineValueSap" text="{orders>lineValueSap}"/>
-                                                    <Text id="cellUnitPriceSap" text="{orders>unitPriceSap}"/>
-                                                    <Text id="cellCustExpectedUnit" text="{orders>custExpectedUnitPrice}"/>
-                                                    <Text id="cellCustExpectedValue" text="{orders>custExpectedValuePerItem}"/>
-                                                    <ObjectStatus id="cellDiff" text="{orders>difference}" state="Error"/>
+                                                    <Text id="cellLineValueSap" text="{path: 'orders>lineValueSap', formatter: '.formatEur'}"/>
+                                                    <Text id="cellUnitPriceSap" text="{path: 'orders>unitPriceSap', formatter: '.formatEur'}"/>
+                                                    <Text id="cellCustExpectedUnit" text="{path: 'orders>custExpectedUnitPrice', formatter: '.formatEur'}"/>
+                                                    <Text id="cellCustExpectedValue" text="{path: 'orders>custExpectedValuePerItem', formatter: '.formatEur'}"/>
+                                                    <ObjectStatus id="cellDiff" text="{path: 'orders>difference', formatter: '.formatEur'}" state="Error"/>
                                                     <VBox id="cellCommentsBox">
                                                         <Text id="cellCommentText" text="{orders>comment}" visible="{= !!${orders>comment}}" class="pvSubText sapUiTinyMarginBottom"/>
                                                         <Button id="cellAddCommentBtn" text="{= ${orders>comment} ? 'Edit Comment' : 'Add Comment'}" icon="sap-icon://comment" type="Transparent" press=".onAddComment"/>

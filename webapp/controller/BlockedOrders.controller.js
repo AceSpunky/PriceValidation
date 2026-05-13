@@ -273,6 +273,22 @@ sap.ui.define([
         },
 
         /**
+         * Formats a EUR string value to always display two decimal places.
+         * Handles values stored with or without decimals (e.g. "230 EUR" → "230.00 EUR").
+         * Returns an empty string when the value is absent.
+         * @memberof com.lipton.pricevalidation.controller.BlockedOrders
+         * @public
+         * @param {string} sValue - Raw EUR string from the model (e.g. "2.3 EUR", "560 EUR")
+         * @returns {string} Formatted string with two decimal places, or empty string
+         */
+        formatEur(sValue) {
+            if (!sValue) return "";
+            const fNum = parseFloat(sValue.replace(/,/g, "").replace(" EUR", "").trim());
+            if (isNaN(fNum)) return sValue;
+            return fNum.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + " EUR";
+        },
+
+        /**
          * Triggers a refresh of the blocked orders list.
          * @memberof com.lipton.pricevalidation.controller.BlockedOrders
          * @public

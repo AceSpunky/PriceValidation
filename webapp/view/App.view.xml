@@ -3,7 +3,7 @@
     xmlns:mvc="sap.ui.core.mvc"
     xmlns="sap.m"
     xmlns:tnt="sap.tnt">
-    <tnt:ToolPage id="toolPage">
+    <tnt:ToolPage id="toolPage" sideExpanded="false">
         <tnt:header>
             <tnt:ToolHeader id="toolHeader">
                 <Button id="menuButton" icon="sap-icon://menu2" press=".onMenuButtonPress" type="Transparent"/>
@@ -11,7 +11,7 @@
             </tnt:ToolHeader>
         </tnt:header>
         <tnt:sideContent>
-            <tnt:SideNavigation id="sideNavigation" itemSelect=".onNavigationItemSelect" selectedItem="blockedOrdersItem" expanded="false">
+            <tnt:SideNavigation id="sideNavigation" itemSelect=".onNavigationItemSelect" selectedItem="blockedOrdersItem">
                 <tnt:item>
                     <tnt:NavigationList id="mainNavList">
                         <tnt:NavigationListItem id="blockedOrdersItem" text="Blocked Orders" icon="sap-icon://alert" key="BlockedOrders"/>
