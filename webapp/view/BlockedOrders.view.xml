@@ -1,44 +1,28 @@
-<mvc:View
-    controllerName="com.lipton.pricevalidation.controller.BlockedOrders"
+<mvc:View controllerName="com.lipton.pricevalidation.controller.BlockedOrders"
     xmlns:mvc="sap.ui.core.mvc"
     xmlns="sap.m"
     xmlns:f="sap.f"
-    xmlns:grid="sap.ui.layout.cssgrid"
-    displayBlock="true">
+    xmlns:grid="sap.ui.layout.cssgrid" displayBlock="true">
 
-    <Page id="page" title="Blocked Orders">
+    <Page id="page" title="Blocked Orders" showHeader="false">
         <content>
             <VBox id="pageWrap" class="pvPageWrap">
 
                 <!-- Search Toolbar -->
-                <OverflowToolbar id="searchToolbar" class="sapUiSmallMarginBottom pvSearchToolbar" height="3rem">
-                    <SearchField
-                        id="searchField"
-                        placeholder="Search by order ID, customer name or number..."
-                        width="30rem"
-                        search=".onSearch"
-                        liveChange=".onSearch"/>
+                <OverflowToolbar id="searchToolbar" class="sapUiSmallMarginBeginEnd sapUiSmallMarginBottom pvSearchToolbar" height="3rem">
+                    <Title id="suggestionPanelTitle" text="Blocked Sales Orders" titleStyle="H4" />
                     <ToolbarSpacer id="searchToolbarSpacer"/>
+                    <SearchField id="searchField" placeholder="Search by order ID, customer name or number..." width="30rem" search=".onSearch" liveChange=".onSearch"/>
+
                     <Button id="refreshBtn" text="Refresh" icon="sap-icon://refresh" type="Ghost" press=".onRefresh"/>
                 </OverflowToolbar>
 
-                   <!-- Warning Strip -->
-                <MessageStrip
-                    id="pageSubtitle"
-                    text="{orders>/summary/subtitle}"
-                    type="Warning"
-                    showIcon="true"
-                    class="sapUiSmallMarginBottom"/>
+                <!-- Warning Strip -->
+                <MessageStrip id="pageSubtitle" text="{orders>/summary/subtitle}" type="Warning" showIcon="true" class="sapUiSmallMarginBottom sapUiSmallMarginBeginEnd"/>
 
 
                 <!-- Orders GridList -->
-                <f:GridList
-                    id="ordersGrid"
-                    items="{orders>/orders}"
-                    showNoData="true"
-                    noDataText="No blocked orders found"
-                    class="sapUiSmallMarginBeginEnd sapUiSmallMarginBottom"
-                    width="98%">
+                <f:GridList id="ordersGrid" items="{orders>/orders}" showNoData="true" noDataText="No blocked orders found" class="sapUiSmallMarginBeginEnd sapUiSmallMarginBottom" width="98%">
                     <f:customLayout>
                         <grid:GridBasicLayout id="ordersGridLayout" gridTemplateColumns="1fr"/>
                     </f:customLayout>
@@ -47,52 +31,78 @@
                             <Panel id="orderPanel" expandable="true" expanded="{orders>expanded}">
                                 <headerToolbar>
                                     <OverflowToolbar id="orderPanelToolbar" height="4rem">
-                                        <VBox id="orderColOrder" class="sapUiSmallMarginEnd">
-                                            <Link id="orderIdLink" text="{orders>id}" press=".onOrderPress"/>
-                                            <Text id="orderMeta" text="{= ${orders>company} + ' · ' + ${orders>date}}" class="pvSubText"/>
-                                        </VBox>
-                                        <VBox id="orderColCustomer" class="sapUiSmallMarginEnd">
-                                            <Text id="customerName" text="{orders>customer}"/>
-                                            <Text id="customerId" text="{orders>customerId}" class="pvSubText"/>
-                                        </VBox>
-                                        <ObjectStatus id="itemsBadge" text="{= ${orders>itemsPending} + '/' + ${orders>itemsTotal} + ' pending'}" state="Warning" inverted="true" class="sapUiSmallMarginEnd"/>
-                                        <GenericTag id="tagSap" text="SAP Value" class="sapUiSmallMarginEnd">
-                                            <ObjectNumber id="sapNum" number="{orders>sapValueStr}" emphasized="false"/>
-                                        </GenericTag>
-                                        <GenericTag id="tagKam" text="KAM Value" class="sapUiSmallMarginEnd">
-                                            <ObjectNumber id="kamNum" number="{orders>kamValueStr}" emphasized="false"/>
-                                        </GenericTag>
-                                        <GenericTag id="tagDiff" text="Δ Difference" status="Error" class="sapUiSmallMarginEnd">
-                                            <ObjectNumber id="diffNum" number="{orders>differenceStr}" state="Error" emphasized="false"/>
-                                        </GenericTag>
-                                        <ObjectStatus id="notifiedStatus" text="Notified" state="Success" visible="{orders>teamNotified}" class="sapUiSmallMarginEnd"/>
+                                        <Title id="orderIdTitle" class="sapUiTinyMarginEnd" text="{orders>id}" titleStyle="H4"/>
+                                        <ObjectStatus id="orderMeta" text="{= ${orders>company} + ' · ' + ${orders>date}}" state="Information"/>
                                         <ToolbarSpacer id="orderToolbarSpacer"/>
                                         <Button id="orderKamBtn" text="All KAM" type="Accept" press=".onOrderAcceptAllKAM" class="sapUiTinyMarginEnd"/>
-                                        <Button id="orderSapBtn" text="All SAP" press=".onOrderAcceptAllSAP"/>
+                                        <Button id="orderSapBtn" class="sapUiSmallMarginEnd" text="All SAP" press=".onOrderAcceptAllSAP"/>
                                     </OverflowToolbar>
                                 </headerToolbar>
                                 <content>
-                                    <Title
-                                        id="lineItemsTitle"
-                                        text="{= 'LINE ITEMS — ' + ${orders>id} + ' · ' + ${orders>customer}}"
-                                        level="H6"
-                                        class="sapUiSmallMarginBeginEnd sapUiTinyMarginBottom sapUiSmallMarginTop"/>
-                                    <Table
-                                        id="lineItemsTable"
-                                        items="{orders>items}"
-                                        showSeparators="All"
-                                        fixedLayout="false"
-                                        class="sapUiSmallMarginBottom">
+                                    <HBox id="orderDetails" wrap="Wrap" class="sapUiSmallMargin" justifyContent="SpaceBetween">
+                                        <VBox id="detailCustomer" class="sapUiSmallMarginEnd" width="170px">
+                                            <Label id="lblDetailCustomer" text="Customer" design="Bold"/>
+                                            <ObjectStatus id="valDetailCustomer" text="{orders>customer}" class="sapUiTinyMarginTop sapMObjectStatusLarge"/>
+                                        </VBox>
+                                        <VBox id="detailCustomerId" class="sapUiSmallMarginEnd" width="170px">
+                                            <Label id="lblDetailCustomerId" text="Customer ID" design="Bold"/>
+                                            <ObjectStatus id="customerId" text="{orders>customerId}" class="sapUiTinyMarginTop sapMObjectStatusLarge"/>
+                                        </VBox>
+                                        <VBox id="detailItems" class="sapUiSmallMarginEnd" width="170px">
+                                            <Label id="lblDetailItems" text="Items Pending" design="Bold"/>
+                                            <ObjectStatus id="valDetailItems" text="{= ${orders>itemsPending} + '/' + ${orders>itemsTotal}}" class="sapUiTinyMarginTop sapMObjectStatusLarge" state="Warning"/>
+                                        </VBox>
+                                        <VBox id="detailSap" class="sapUiSmallMarginEnd" width="170px">
+                                            <Label id="lblDetailSap" text="SAP Value" design="Bold"/>
+                                            <ObjectStatus id="valDetailSap" text="{orders>sapValueStr}" class="sapUiTinyMarginTop sapMObjectStatusLarge"/>
+                                        </VBox>
+                                        <VBox id="detailKam" class="sapUiSmallMarginEnd" width="170px">
+                                            <Label id="lblDetailKam" text="KAM Value" design="Bold"/>
+                                            <ObjectStatus id="valDetailKam" text="{orders>kamValueStr}" class="sapUiTinyMarginTop sapMObjectStatusLarge"/>
+                                        </VBox>
+                                        <VBox id="detailDiff" class="sapUiSmallMarginEnd" width="170px">
+                                            <Label id="lblDetailDiff" text="Δ Difference" design="Bold"/>
+                                            <ObjectStatus id="valDetailDiff" text="{orders>differenceStr}" state="Error" class="sapUiTinyMarginTop sapMObjectStatusLarge" />
+                                        </VBox>
+                                        <VBox id="detailNotified" width="170px">
+                                            <Label id="lblDetailNotified" text="Team Notified" design="Bold"/>
+                                            <ObjectStatus id="valDetailNotified" text="Notified" state="Success" visible="{orders>teamNotified}" class="sapUiTinyMarginTop sapMObjectStatusLarge" />
+                                        </VBox>
+                                    </HBox>
+
+                                    <OverflowToolbar id="linesItemsTitleToolbar" height="4rem">
+                                        <Title id="lineItemsTitle" text="{= 'LINE ITEMS — ' + ${orders>id} + ' · ' + ${orders>customer}}" titleStyle="H4" class="sapUiSmallMarginBottom sapUiMediumMarginTop"/>
+                                    </OverflowToolbar>
+                                   
+                                    <Table id="lineItemsTable" items="{orders>items}" showSeparators="All" fixedLayout="false" class="sapUiSmallMarginBottom">
                                         <columns>
-                                            <Column id="colItemNo"><Text id="lblItemNo" text="ITEM #"/></Column>
-                                            <Column id="colMaterial"><Text id="lblMaterial" text="MATERIAL"/></Column>
-                                            <Column id="colQty"><Text id="lblQty" text="QTY"/></Column>
-                                            <Column id="colSapCs"><Text id="lblSapCs" text="SAP / CS"/></Column>
-                                            <Column id="colKamCs"><Text id="lblKamCs" text="KAM / CS"/></Column>
-                                            <Column id="colTpmCs"><Text id="lblTpmCs" text="TPM / CS"/></Column>
-                                            <Column id="colDiff"><Text id="lblDiff" text="Δ DIFF"/></Column>
-                                            <Column id="colStatus"><Text id="lblStatus" text="STATUS"/></Column>
-                                            <Column id="colActions"><Text id="lblActions" text="ACTIONS"/></Column>
+                                            <Column id="colItemNo">
+                                                <Text id="lblItemNo" text="ITEM #"/>
+                                            </Column>
+                                            <Column id="colMaterial">
+                                                <Text id="lblMaterial" text="MATERIAL"/>
+                                            </Column>
+                                            <Column id="colQty">
+                                                <Text id="lblQty" text="QTY"/>
+                                            </Column>
+                                            <Column id="colSapCs">
+                                                <Text id="lblSapCs" text="SAP / CS"/>
+                                            </Column>
+                                            <Column id="colKamCs">
+                                                <Text id="lblKamCs" text="KAM / CS"/>
+                                            </Column>
+                                            <Column id="colTpmCs">
+                                                <Text id="lblTpmCs" text="TPM / CS"/>
+                                            </Column>
+                                            <Column id="colDiff">
+                                                <Text id="lblDiff" text="Δ DIFF"/>
+                                            </Column>
+                                            <Column id="colStatus">
+                                                <Text id="lblStatus" text="STATUS"/>
+                                            </Column>
+                                            <Column id="colActions">
+                                                <Text id="lblActions" text="ACTIONS"/>
+                                            </Column>
                                         </columns>
                                         <items>
                                             <ColumnListItem id="lineItem" type="Inactive">

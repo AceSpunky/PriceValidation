@@ -437,11 +437,6 @@ sap.ui.define([
             oModel.setProperty("/filteredCount", aFiltered.length);
         },
 
-        onOrderPress(oEvent) {
-            const sId = oEvent.getSource().getBindingContext("orders").getProperty("id");
-            MessageToast.show("Opening order " + sId);
-        },
-
         onAcceptAllKAM() {
             MessageToast.show("Accepted KAM prices for all orders");
         },
