@@ -46,8 +46,8 @@
                                             <Text id="customerId" text="{orders>customerId}" class="sapUiTinyMarginTop"/>
                                         </VBox>
                                         <VBox id="detailItems" class="sapUiSmallMarginEnd" width="170px">
-                                            <Label id="lblDetailItems" text="Items Pending" design="Bold"/>
-                                            <ObjectStatus id="valDetailItems" text="{= ${orders>itemsPending} + '/' + ${orders>itemsTotal}}" class="sapUiTinyMarginTop sapMObjectStatusLarge" state="Warning"/>
+                                            <Label id="lblDetailItems" text="Items" design="Bold"/>
+                                            <ObjectStatus id="valDetailItems" text="{= ${orders>itemsPending} + '/' + ${orders>itemsTotal} + ' pending'}" class="sapUiTinyMarginTop sapMObjectStatusLarge" state="Warning"/>
                                         </VBox>
                                         <VBox id="detailSap" class="sapUiSmallMarginEnd" width="170px">
                                             <Label id="lblDetailSap" text="SAP Value" design="Bold"/>
