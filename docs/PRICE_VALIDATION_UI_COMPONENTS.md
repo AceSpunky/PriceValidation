@@ -49,8 +49,8 @@ Bound to `orders>/orders`. Uses a single-column `GridBasicLayout` (`gridTemplate
 #### GridListItem
 One item per blocked sales order. Type `Inactive` — the Panel inside handles its own interaction.
 
-#### Panel _(expandable, per order)_
-Each blocked order lives in a collapsible panel. The first order is expanded by default (`expanded="{orders>expanded}"`); all others start collapsed.
+#### Panel _(expandable, per sales order)_
+Each blocked sales order lives in a collapsible panel. The first sales order is expanded by default (`expanded="{orders>expanded}"`); all others start collapsed.
 
 #### OverflowToolbar _(panel header)_
 Hosts the Sales Order Number `ObjectStatus` (state `Information`, large styling) on the left, and two bulk-action buttons on the right — **All KAM** (type `Accept`) and **All SAP** — allowing the user to accept prices for all line items in the order in one action.

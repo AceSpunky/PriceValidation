@@ -43,7 +43,7 @@ sap.ui.define([
                                 custExpectedUnitPrice: "10,000 EUR",
                                 custExpectedValuePerItem: "",
                                 difference: "20 EUR",
-                                comment: "",
+                                comment: "Customer confirmed the SAP price is aligned with the agreed trade terms. Awaiting final sign-off from trade manager.",
                                 status: "pending"
                             },
                             {
@@ -97,7 +97,7 @@ sap.ui.define([
                                 custExpectedUnitPrice: "",
                                 custExpectedValuePerItem: "2 EUR",
                                 difference: "10.2 EUR",
-                                comment: "",
+                                comment: "Price discrepancy raised with pricing team. Customer expects the promotional rate from Q4 2025 contract to apply here.",
                                 status: "pending"
                             },
                             {
@@ -137,7 +137,7 @@ sap.ui.define([
                                 custExpectedUnitPrice: "",
                                 custExpectedValuePerItem: "1.8 EUR",
                                 difference: "403.2 EUR",
-                                comment: "",
+                                comment: "Large volume order — difference is significant. Escalated to regional KAM lead for approval before accepting customer price.",
                                 status: "pending"
                             }
                         ]
@@ -163,7 +163,7 @@ sap.ui.define([
                                 custExpectedUnitPrice: "550 EUR",
                                 custExpectedValuePerItem: "",
                                 difference: "10 EUR",
-                                comment: "",
+                                comment: "Discussed with customer — they referenced last year's pricing agreement. Checking with finance to confirm applicable rate.",
                                 status: "pending"
                             }
                         ]
@@ -257,7 +257,7 @@ sap.ui.define([
                                 custExpectedUnitPrice: "",
                                 custExpectedValuePerItem: "2.3 EUR",
                                 difference: "0.14 EUR",
-                                comment: "",
+                                comment: "Minor rounding difference on unit price. Customer to accept SAP price — confirmed verbally on 10.01.2026 call.",
                                 status: "pending"
                             }
                         ]

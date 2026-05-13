@@ -117,10 +117,11 @@
                                                     <Text id="cellCustExpectedUnit" text="{path: 'orders>custExpectedUnitPrice', formatter: '.formatEur'}"/>
                                                     <Text id="cellCustExpectedValue" text="{path: 'orders>custExpectedValuePerItem', formatter: '.formatEur'}"/>
                                                     <ObjectStatus id="cellDiff" text="{path: 'orders>difference', formatter: '.formatEur'}" state="Error"/>
-                                                    <VBox id="cellCommentsBox">
-                                                        <Text id="cellCommentText" text="{orders>comment}" visible="{= !!${orders>comment}}" class="pvSubText sapUiTinyMarginBottom"/>
-                                                        <Button id="cellAddCommentBtn" text="{= ${orders>comment} ? 'Edit Comment' : 'Add Comment'}" icon="sap-icon://comment" type="Transparent" press=".onAddComment"/>
-                                                    </VBox>
+                                                    <Button id="cellAddCommentBtn" badgeStyle="Default" text="{= ${orders>comment} ? 'Edit Comment' : 'Add Comment'}" icon="sap-icon://comment" type="Transparent" press=".onAddComment">
+                                                        <customData>
+                                                            <BadgeCustomData id="commentBadge" key="badge" value="{= ${orders>comment} ? '1' : ''}"/>
+                                                        </customData>
+                                                    </Button>
                                                     <Select id="cellStatus" selectedKey="pending">
                                                         <items>
                                                             <core:Item id="statusPending" key="pending" text="Pending"/>
