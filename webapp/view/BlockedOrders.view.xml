@@ -43,10 +43,7 @@
                                         <VBox id="detailCustomer" class="sapUiSmallMarginEnd" width="170px">
                                             <Label id="lblDetailCustomer" text="Customer" design="Bold"/>
                                             <ObjectStatus id="valDetailCustomer" text="{orders>customer}" class="sapUiTinyMarginTop sapMObjectStatusLarge"/>
-                                        </VBox>
-                                        <VBox id="detailCustomerId" class="sapUiSmallMarginEnd" width="170px">
-                                            <Label id="lblDetailCustomerId" text="Customer ID" design="Bold"/>
-                                            <ObjectStatus id="customerId" text="{orders>customerId}" class="sapUiTinyMarginTop sapMObjectStatusLarge"/>
+                                            <Text id="customerId" text="{orders>customerId}" class="sapUiTinyMarginTop"/>
                                         </VBox>
                                         <VBox id="detailItems" class="sapUiSmallMarginEnd" width="170px">
                                             <Label id="lblDetailItems" text="Items Pending" design="Bold"/>
@@ -73,7 +70,7 @@
                                     <OverflowToolbar id="linesItemsTitleToolbar" height="4rem">
                                         <Title id="lineItemsTitle" text="{= 'LINE ITEMS — ' + ${orders>id} + ' · ' + ${orders>customer}}" titleStyle="H4" class="sapUiSmallMarginBottom sapUiMediumMarginTop"/>
                                     </OverflowToolbar>
-                                   
+
                                     <Table id="lineItemsTable" items="{orders>items}" showSeparators="All" fixedLayout="false" class="sapUiSmallMarginBottom">
                                         <columns>
                                             <Column id="colItemNo">
