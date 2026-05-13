@@ -51,7 +51,10 @@
       "minUI5Version": "1.147.2",
       "libs": {
         "sap.m": {},
-        "sap.ui.core": {}
+        "sap.ui.core": {},
+        "sap.f": {},
+        "sap.tnt": {},
+        "sap.ui.layout": {}
       }
     },
     "contentDensities": {
@@ -77,7 +80,7 @@
       "config": {
         "routerClass": "sap.m.routing.Router",
         "controlAggregation": "pages",
-        "controlId": "app",
+        "controlId": "navContainer",
         "transition": "slide",
         "type": "View",
         "viewType": "XML",
@@ -96,8 +99,8 @@
       ],
       "targets": {
         "TargetView1": {
-          "id": "View1",
-          "name": "View1"
+          "id": "BlockedOrders",
+          "name": "BlockedOrders"
         }
       }
     },
