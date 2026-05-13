@@ -10,7 +10,7 @@
 
                 <!-- Search Toolbar -->
                 <OverflowToolbar id="searchToolbar" class="sapUiSmallMarginBeginEnd sapUiSmallMarginBottom pvSearchToolbar" height="3rem">
-                    <Title id="suggestionPanelTitle" text="Blocked Sales Orders" titleStyle="H4" />
+                    <Title id="suggestionPanelTitle" text="{= 'Blocked Sales Orders (' + ${orders>/orders/length} + ')'}" titleStyle="H4" />
                     <ToolbarSpacer id="searchToolbarSpacer"/>
                     <SearchField id="searchField" placeholder="Search by order ID, customer name or number..." width="30rem" search=".onSearch" liveChange=".onSearch"/>
 
