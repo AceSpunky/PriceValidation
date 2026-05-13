@@ -133,8 +133,9 @@
                                                     </Select>
                                                     <Select id="cellActions" selectedKey="acceptSap">
                                                         <items>
-                                                            <core:Item id="actionAcceptSap" key="acceptSap" text="SAP Price Correct"/>
-                                                            <core:Item id="actionAcceptCustExpected" key="acceptCustExpected" text="Accept Customer expected Price"/>
+                                                            <core:Item id="actionAcceptSap" key="acceptSap" text="Correct SAP Price"/>
+                                                            <core:Item id="actionDenySap" key="acceptSap" text="Incorrect SAP Price"/>
+                                                            <core:Item id="actionAcceptCustExpected" key="acceptCustExpected" text="Accept Customer Expected Price"/>
                                                         </items>
                                                     </Select>
                                                 </cells>
