@@ -119,8 +119,9 @@ A `Select` dropdown for the price decision.
 
 | Key | Label |
 |---|---|
-| `acceptSap` | SAP Price Correct |
-| `acceptCustExpected` | Accept Customer expected Price |
+| `acceptSap` | Correct SAP Price |
+| `rejectSap` | Incorrect SAP Price |
+| `acceptCustExpected` | Accept Customer Expected Price |
 
 ---
 
